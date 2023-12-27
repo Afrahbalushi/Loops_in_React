@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const numbers = [1,2,3,4,5,6,7,8,9,10]
+  let sum = 0
+
+  //sum
+  for(let i =0; i < numbers.length; i++) {
+    
+    sum += numbers[i]
+
+  }
+  
+  //average
+  const average = numbers.length === 0 ? 0 : sum / numbers.length;
+
+  //fillter even numbers
+  const evenNumbers = []
+  for(let i = 0; i < numbers.length; i++){
+     if(numbers[i] % 2 === 0){
+        evenNumbers.push(numbers[i]);
+     }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>JavaScript Looping</h1>
+     <h4>List of Numbers = [ {numbers.join(' , ')} ]</h4>
+      <h3>SUM : {sum}</h3>
+      <h3>AVERAGE : {average}</h3>
+      <h3>FILLTERING : {evenNumbers.join(' , ')}</h3>
     </div>
   );
 }
