@@ -1,3 +1,4 @@
+import { List } from 'react-virtualized';
 import './App.css';
 
 function App() {
@@ -21,6 +22,17 @@ function App() {
         evenNumbers.push(numbers[i]);
      }
   }
+
+//React virtualized
+
+  const data = ['item 1', 'item 2', 'item 3', 'item 4']
+
+  const rowRender = ({index, key, style}) => (
+     <div key={key} style={style}>
+       {data[index]}
+     </div>
+  )
+
   return (
     <div className="App">
      <h1>JavaScript Looping</h1>
@@ -28,6 +40,17 @@ function App() {
       <h3>SUM : {sum}</h3>
       <h3>AVERAGE : {average}</h3>
       <h3>FILLTERING : {evenNumbers.join(' , ')}</h3>
+
+      <hr></hr>
+
+      <h1>React Virtualized</h1>
+      <List 
+      width={300}
+      height={400}
+      rowCount={data.length}
+      rowHeight={40}
+      rowRenderer={rowRender}
+      />
     </div>
   );
 }
