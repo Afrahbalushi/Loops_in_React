@@ -1,6 +1,7 @@
 import React from 'react';
-import { List, Grid } from 'react-virtualized';
-import 'react-virtualized/styles.css'; // Import the styles for react-virtualized
+import { List, Grid, Table } from 'react-virtualized';
+import 'react-virtualized/styles.css';
+import './App.css';
 
 function App() {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -37,6 +38,31 @@ function App() {
     </div>
   );
 
+  // Table
+  const users = [
+    { name: 'Afrah', age: 27, city: 'Mus' },
+    { name: 'Ali', age: 23, city: 'Seeb' },
+    { name: 'Aya', age: 18, city: 'Mus' },
+    { name: 'Farah', age: 24, city: 'Seeb' }
+  ];
+
+  const tableRowRenderer = ({ index, key, style }) => {
+    const rowData = users[index];
+    return (
+      <div key={key} style={style} className="table-row">
+        <p className="table-cell">{rowData.name}</p>
+        <p className="table-cell">{rowData.age}</p>
+        <p className="table-cell">{rowData.city}</p>
+      </div>
+    );
+  };
+
+  const headerRender = ({ label, columnIndex }) => (
+    <div key={columnIndex} className="table-header">
+      {label}
+    </div>
+  );
+
   return (
     <div className="App">
       <h1>JavaScript Looping</h1>
@@ -48,9 +74,11 @@ function App() {
       <hr></hr>
 
       <h1>React Virtualized</h1>
-      <List width={300} height={400} rowCount={data.length} rowHeight={40} rowRenderer={rowRender} />
-
+      <List width={300} height={200} rowCount={data.length} rowHeight={40} rowRenderer={rowRender} />
+      <h3>Grid</h3>
       <Grid width={300} height={200} rowCount={data.length} columnCount={2} rowHeight={40} columnWidth={150} cellRenderer={cellRenderer} />
+      <h3>Table</h3>
+      <Table width={400} height={400} rowCount={users.length} rowHeight={50} rowGetter={({ index }) => users[index]} headerHeight={50} rowRenderer={tableRowRenderer} headerRenderer={headerRender} />
     </div>
   );
 }
